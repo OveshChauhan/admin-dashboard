@@ -1,35 +1,60 @@
-# Admin Dashboard System
+# Admin Dashboard
 
-Production-oriented MERN admin dashboard demonstrating authentication, RBAC, REST APIs, RTK Query, MongoDB aggregation, server-side tables, and a Material UI SaaS interface.
+Admin dashboard built with React 18, Redux Toolkit, RTK Query, Material UI, Node.js, Express.js and MongoDB.
 
-## Stack
+## Tech Stack
+
+**Frontend**
 - React 18
-- Webpack 5
 - Redux Toolkit
 - RTK Query
-- React Router v6
+- React Router
 - Material UI
 - Recharts
-- Node.js / Express
-- MongoDB / Mongoose
-- JWT / bcrypt
 
-## Roles
-- Admin: full access
-- Manager: view/create/update, no destructive admin operations
-- Tenant: restricted read-only access to permitted data
+**Backend**
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT
+- bcrypt
 
-## Run
-1. Start MongoDB.
-2. Backend:
-   `cd backend && npm install && npm run dev`
-3. Frontend in another terminal:
-   `cd frontend && npm install && npm run dev`
-4. Open http://localhost:5173
+## Features
 
-Default seeded accounts are created automatically:
-- admin@example.com / Admin@12345
-- manager@example.com / Manager@12345
-- tenant@example.com / Tenant@12345
+- JWT based login
+- Role based access control
+- Admin, Manager and Tenant roles
+- Protected routes
+- User management
+- Event management
+- Dashboard analytics
+- Server-side pagination, sorting and filtering
+- MongoDB aggregation for dashboard statistics
+- RTK Query for API requests and caching
+- Material UI based dashboard
 
-Change these credentials before any real deployment.
+## Project Structure
+
+```text
+admin-dashboard/
+├── backend/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── scripts/
+│   ├── utils/
+│   └── server.js
+│
+├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   ├── components/
+│   │   ├── features/
+│   │   ├── pages/
+│   │   └── theme/
+│   └── webpack.config.js
+│
+├── .gitignore
+└── README.md
