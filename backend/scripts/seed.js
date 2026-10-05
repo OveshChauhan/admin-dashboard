@@ -1,9 +1,13 @@
-// Seeds development users and sample events so the dashboard is immediately usable after startup.
+// Seeds fixed demo users and sample events for local development only.
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const Event = require("../models/Event");
 
-async function seedAdminIfEmpty() {
+async function seedDevelopmentData() {
+  if (process.env.NODE_ENV !== "development") {
+    throw new Error("Demo data seeding is only allowed when NODE_ENV=development.");
+  }
+
   const count = await User.countDocuments();
 
   if (count > 0) {
@@ -82,10 +86,20 @@ if (require.main === module) {
   require("dotenv").config();
   const mongoose = require("mongoose");
 
+  if (process.env.NODE_ENV !== "development") {
+    console.error("Refusing to seed demo accounts outside development.");
+    process.exit(1);
+  }
+
+  if (!process.env.MONGO_URI) {
+    console.error("MONGO_URI is required.");
+    process.exit(1);
+  }
+
   mongoose
-    .connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/admin_dashboard")
+    .connect(process.env.MONGO_URI)
     .then(async function () {
-      await seedAdminIfEmpty();
+      await seedDevelopmentData();
       await mongoose.disconnect();
       process.exit(0);
     })
@@ -95,4 +109,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = { seedAdminIfEmpty };
+module.exports = { seedDevelopmentData };

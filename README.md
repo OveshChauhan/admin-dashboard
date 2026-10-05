@@ -58,3 +58,10 @@ admin-dashboard/
 │
 ├── .gitignore
 └── README.md
+```
+
+## Backend environment and initial production admin
+
+Create `backend/.env` from `backend/.env.example` for local development. The API requires `NODE_ENV`, `MONGO_URI`, separate JWT secrets of at least 32 bytes, and `CLIENT_URL`. Generate unique JWT secrets and keep `.env` out of Git.
+
+The fixed demo users and sample events are seeded only when `NODE_ENV=development`. Production startup never creates demo accounts. To create the first production administrator, set `NODE_ENV=production` and the production database settings in `backend/.env`, then run `npm run create-admin` from `backend/` with these one-time variables set in the shell: `BOOTSTRAP_ADMIN_NAME`, `BOOTSTRAP_ADMIN_EMAIL`, and `BOOTSTRAP_ADMIN_PASSWORD`. The password must be 12–72 bytes. After the command succeeds, remove those three bootstrap variables from the shell. The command refuses to create another bootstrap admin if an admin already exists.

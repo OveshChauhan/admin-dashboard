@@ -8,7 +8,7 @@ function createAccessToken(user) {
       role: user.role,
       name: user.name
     },
-    process.env.JWT_ACCESS_SECRET || "development_access_secret",
+    process.env.JWT_ACCESS_SECRET,
     { expiresIn: "1h" }
   );
 }
@@ -18,7 +18,7 @@ function createRefreshToken(user) {
     {
       sub: user._id.toString()
     },
-    process.env.JWT_REFRESH_SECRET || "development_refresh_secret",
+    process.env.JWT_REFRESH_SECRET,
     { expiresIn: "7d" }
   );
 }

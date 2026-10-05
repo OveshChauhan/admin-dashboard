@@ -16,7 +16,7 @@ async function authenticate(req, res, next) {
 
     const payload = jwt.verify(
       token,
-      process.env.JWT_ACCESS_SECRET || "development_access_secret"
+      process.env.JWT_ACCESS_SECRET
     );
 
     const user = await User.findById(payload.sub).select("-passwordHash -refreshTokenHash");

@@ -78,7 +78,7 @@ async function refresh(req, res, next) {
 
     const payload = jwt.verify(
       refreshToken,
-      process.env.JWT_REFRESH_SECRET || "development_refresh_secret"
+      process.env.JWT_REFRESH_SECRET
     );
 
     const user = await User.findById(payload.sub);
