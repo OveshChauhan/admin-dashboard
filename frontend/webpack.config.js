@@ -3,6 +3,17 @@ const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const frontendEnvPath = path.resolve(__dirname, ".env");
+if (typeof process.loadEnvFile === "function") {
+  try {
+    process.loadEnvFile(frontendEnvPath);
+  } catch (error) {
+    if (error.code !== "ENOENT") {
+      throw error;
+    }
+  }
+}
+
 module.exports = function (env, argv) {
   const isProduction = argv.mode === "production";
 
