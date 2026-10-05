@@ -1,4 +1,5 @@
 // Configures Webpack 5 development and production builds for the React 18 frontend.
+const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -36,6 +37,11 @@ module.exports = function (env, argv) {
     plugins: [
       new HtmlWebpackPlugin({
         template: "./public/index.html"
+      }),
+      new webpack.DefinePlugin({
+        "process.env.API_BASE_URL": JSON.stringify(
+          process.env.API_BASE_URL || "http://localhost:5001/api"
+        )
       })
     ],
     devServer: {
