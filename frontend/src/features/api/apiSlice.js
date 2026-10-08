@@ -51,6 +51,11 @@ export const apiSlice = createApi({
   tagTypes: ["User", "Event", "Dashboard"],
   endpoints: function (builder) {
     return {
+      health: builder.query({
+        query: function () {
+          return "/health";
+        }
+      }),
       login: builder.mutation({
         query: function (body) {
           return {
