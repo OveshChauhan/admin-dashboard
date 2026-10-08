@@ -210,6 +210,7 @@ export const apiSlice = createApi({
 });
 
 export const {
+  useHealthQuery,
   useLoginMutation,
   useLogoutMutation,
   useGetMeQuery,
