@@ -4,14 +4,13 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { Alert, Box, Button, Card, CardContent, CircularProgress, Stack, TextField, Typography } from "@mui/material";
 import LockRoundedIcon from "@mui/icons-material/LockRounded";
 import { useSelector, useDispatch } from "react-redux";
-import { useHealthQuery, useLoginMutation } from "../features/api/apiSlice";
+import { useLoginMutation } from "../features/api/apiSlice";
 import { setCredentials } from "../features/auth/authSlice";
 
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { accessToken } = useSelector(function (state) { return state.auth; });
-  const { isError: isBackendUnavailable } = useHealthQuery(undefined, { pollingInterval: 60000 });
   const [login, { isLoading }] = useLoginMutation();
   const [email, setEmail] = useState("admin@example.com");
   const [password, setPassword] = useState("Admin@12345");
@@ -70,11 +69,9 @@ export default function Login() {
                 <Typography sx={{ color: "text.secondary", mt: 1 }}>Sign in to your admin workspace.</Typography>
               </Box>
 
-              {isBackendUnavailable && (
-                <Alert severity="info">
-                  The backend server is currently unavailable. Sign-in will work again when the EC2 server is running.
-                </Alert>
-              )}
+              <Alert severity="info">
+                Maintenance notice: Sign-in and live data are unavailable while the EC2 backend and MongoDB Atlas are stopped.
+              </Alert>
 
               {error && <Alert severity="error">{error}</Alert>}
 
